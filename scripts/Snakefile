@@ -1,0 +1,55 @@
+rule combine:
+	input:
+		"/home/students/bioinf/a/am467109/cyanobacteria/sinice/scripts/combine.sh"
+	output:
+		"/home/students/bioinf/a/am467109/cyanobacteria/sinice/combined.fasta"
+	shell:
+		"""
+		{input}
+		"""
+
+rule cluster:
+	input:
+		script = "/home/students/bioinf/a/am467109/cyanobacteria/sinice/scripts/clustering.sh",
+		sekwencje = "/home/students/bioinf/a/am467109/cyanobacteria/sinice/combined.fasta"
+	shell:
+		"{input.script}"
+
+rule msa:
+	input:
+		script = "/home/students/bioinf/a/am467109/cyanobacteria/sinice/scripts/aln_mafft.sh"
+	shell:
+		"{input.script}"
+
+
+rule filter_clusters:
+	input:
+		script = "/home/students/bioinf/a/am467109/cyanobacteria/sinice/scripts/filtrowanie.py"
+	shell:
+		"{input.script}"
+
+rule trees:
+	input:
+		script = "/home/students/bioinf/a/am467109/cyanobacteria/sinice/scripts/iqtree_tree.sh"
+	shell:
+		"{input.script}"
+
+rule trees_boot:
+	input:
+		script = "/home/students/bioinf/a/am467109/cyanobacteria/sinice/scripts/iqtree_tree_boot.sh"
+	shell:
+		"{input.script}"
+
+rule consensus:
+	input:
+		script = "/home/students/bioinf/a/am467109/cyanobacteria/sinice/scripts/iqtree_cons.sh"
+	shell:
+		"{input.script}"
+
+rule supertree:
+	input:
+		script = "/home/students/bioinf/a/am467109/cyanobacteria/sinice/scripts/fasturec_script.sh"
+	output:
+		"/home/students/bioinf/a/am467109/cyanobacteria/sinice/fu.txt"
+	shell:
+		"{input.script}"
