@@ -24,7 +24,7 @@ rule msa:
 
 rule filter_clusters:
 	input:
-		script = "/home/students/bioinf/a/am467109/cyanobacteria/sinice/scripts/filtrowanie.py"
+		script = "/home/students/bioinf/a/am467109/cyanobacteria/sinice/scripts/filtering.py"
 	shell:
 		"{input.script}"
 
